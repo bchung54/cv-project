@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { AddButton } from './Buttons';
 import uniqid from 'uniqid';
 
 class SubItemList extends Component {
@@ -23,6 +24,7 @@ class LineItem extends Component {
 			return (
 				<li className="line-item">
 					<span className="line-text">{text}</span>
+					<AddButton text="+ Add Detail" />
 					<SubItemList subItems={subItems} />
 				</li>
 			);

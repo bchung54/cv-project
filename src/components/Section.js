@@ -7,8 +7,8 @@ export class Personal extends Component {
 
 		this.state = {
 			title: this.props.title,
-			skills: ['PPT', 'Excel'],
-			interests: ['basketball']
+			skills: this.props.skills,
+			interests: this.props.interests
 		};
 	}
 	render() {
@@ -20,10 +20,16 @@ export class Personal extends Component {
 				<div>
 					<span className="personal">Skills: </span>
 					<span>{skills ? skills.join(', ') : ''}</span>
+					<span>
+						<button className="add-personal">+Add Skill</button>
+					</span>
 				</div>
 				<div>
 					<span className="personal">Interests: </span>
 					<span>{interests ? interests.join(', ') : ''}</span>
+					<span>
+						<button className="add-personal">+Add Interest</button>
+					</span>
 				</div>
 			</section>
 		);
@@ -35,36 +41,7 @@ class Section extends Component {
 		super(props);
 
 		this.state = {
-			experiences: [
-				{
-					placeName: 'Company',
-					subTitle: 'Janitor',
-					timePeriod: {
-						from: {
-							month: 'Jan',
-							year: 2010
-						},
-						to: {
-							month: 'May',
-							year: 2015
-						}
-					},
-					location: {
-						city: 'Denver',
-						state: 'CO'
-					},
-					items: [
-						{
-							text: 'Manage facilities',
-							subItems: ['Open facilities', 'Close facilities']
-						},
-						{
-							text: 'Park cars',
-							subItems: ['Drive cars fast', 'Fit tight spaces']
-						}
-					]
-				}
-			]
+			experiences: this.props.experiences
 		};
 	}
 	render() {
@@ -72,7 +49,12 @@ class Section extends Component {
 		const { experiences } = this.state;
 		return (
 			<section>
-				<h2>{title}</h2>
+				<div className="section-heading">
+					<h2>{title}</h2>
+					<span>
+						<button>+Add Experience</button>
+					</span>
+				</div>
 				<hr />
 				{experiences.map((element, id) => {
 					return (
@@ -82,6 +64,7 @@ class Section extends Component {
 							timePeriod={element.timePeriod}
 							location={element.location}
 							items={element.items}
+							label={title === 'Work Experience' ? 'work-exp' : 'edu-exp'}
 							key={id}
 						/>
 					);

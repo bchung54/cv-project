@@ -1,62 +1,73 @@
 .App {
-  margin: 3rem 10rem;
+	margin: 5rem 20vw;
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  background-color: rgb(98, 131, 163);
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem 2rem;
+	background-color: rgb(98, 131, 163);
 }
 
 /* Name and Current Job Title */
 
 .header-name {
-  font-size: 3rem;
+	font-size: 3rem;
 }
 
 /* Contact Info */
 .header-side {
-  text-align: left;
+	text-align: left;
 }
 
 .contact-item {
-  display: grid;
-  grid-template-columns: 3rem auto;
-  padding: 0.1rem;
+	display: grid;
+	grid-template-columns: 3rem auto;
+	padding: 0.1rem;
 }
 
 .contact-icon {
-  text-align: center;
+	text-align: center;
 }
 
 section > *:not(hr) {
-  padding: 0 2rem;
-  padding-top: 0.3rem;
+	padding: 0 2rem;
+	padding-top: 0.3rem;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .heading {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .heading-right {
-  text-align: right;
+	text-align: right;
+}
+
+.sub-title {
+	font-style: italic;
 }
 
 .sub-list {
-  list-style-type: circle;
-  margin-left: 48px;
+	list-style-type: circle;
+	margin-left: 48px;
 }
 
 h2 {
-  font-size: 1.75rem;
+  display: inline-block;
+	font-size: 1.75rem;
 }
 
 h3 {
-  font-size: 1.25rem;
+	font-size: 1.25rem;
 }
 
 .personal {
-  font-weight: bold;
+	font-weight: bold;
 }
