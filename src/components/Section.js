@@ -1,9 +1,38 @@
 import React, { Component } from 'react';
 import ExperienceBlock from './ExperienceBlock';
 
+export class Personal extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			title: this.props.title,
+			skills: ['PPT', 'Excel'],
+			interests: ['basketball']
+		};
+	}
+	render() {
+		const { title, skills, interests } = this.state;
+		return (
+			<section>
+				<h2>{title}</h2>
+				<hr />
+				<div>
+					<span className="personal">Skills: </span>
+					<span>{skills ? skills.join(', ') : ''}</span>
+				</div>
+				<div>
+					<span className="personal">Interests: </span>
+					<span>{interests ? interests.join(', ') : ''}</span>
+				</div>
+			</section>
+		);
+	}
+}
+
 class Section extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.state = {
 			experiences: [
@@ -28,6 +57,10 @@ class Section extends Component {
 						{
 							text: 'Manage facilities',
 							subItems: ['Open facilities', 'Close facilities']
+						},
+						{
+							text: 'Park cars',
+							subItems: ['Drive cars fast', 'Fit tight spaces']
 						}
 					]
 				}
@@ -39,16 +72,20 @@ class Section extends Component {
 		const { experiences } = this.state;
 		return (
 			<section>
-				<h3>{title}</h3>
+				<h2>{title}</h2>
 				<hr />
-				{experiences.map((element) => (
-					<ExperienceBlock
-						placeName={element.placeName}
-						subTitle={element.subTitle}
-						timePeriod={element.timePeriod}
-						location={element.location}
-					/>
-				))}
+				{experiences.map((element, id) => {
+					return (
+						<ExperienceBlock
+							placeName={element.placeName}
+							subTitle={element.subTitle}
+							timePeriod={element.timePeriod}
+							location={element.location}
+							items={element.items}
+							key={id}
+						/>
+					);
+				})}
 			</section>
 		);
 	}

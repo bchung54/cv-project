@@ -19,10 +19,10 @@ class ContactInfo extends Component {
 			default:
 		}
 		return (
-			<div className="contact-item">
-				{icon}
-				<span>{text}</span>
-			</div>
+			<h3 className="contact-item">
+				<span className="contact-icon">{icon}</span>
+				<span className="contact-text">{text}</span>
+			</h3>
 		);
 	}
 }
@@ -44,11 +44,11 @@ class Header extends Component {
 
 		return (
 			<header>
-				<div>
-					<div className="header-name">{name}</div>
-					<div className="header-title">{currTitle}</div>
+				<div className="header-main">
+					<h1 className="header-name">{name}</h1>
+					<h3 className="header-title">{currTitle}</h3>
 				</div>
-				<div>
+				<div className="header-side">
 					<ContactInfo type="email" text={email} />
 					<ContactInfo type="phone" text={phone} />
 					<ContactInfo type="location" text={location} />

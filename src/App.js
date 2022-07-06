@@ -1,7 +1,7 @@
 import './App.css';
 import React, { Component } from 'react';
 import Header from './components/Header';
-import Section from './components/Section';
+import Section, { Personal } from './components/Section';
 
 class App extends Component {
 	render() {
@@ -11,12 +11,12 @@ class App extends Component {
 					name="John Doe"
 					currTitle="Janitor"
 					email="blah@blah.com"
-					phone="(555)555-555"
+					phone="(555)555-5555"
 					location="London, UK"
 				/>
 				<Section title="Work Experience" />
 				<Section title="Education" />
-				<Section title="Skills & Interests" />
+				<Personal title="Skills & Interests" />
 			</div>
 		);
 	}

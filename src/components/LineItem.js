@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
+import uniqid from 'uniqid';
 
-/* class SubItem extends Component {
+class SubItemList extends Component {
 	render() {
-		const text = this.props.text;
-		return <li className="sub-item">{text}</li>;
+		const { subItems } = this.props;
+		return (
+			<ul className="sub-list">
+				{subItems.map((element) => (
+					<li className="sub-item" key={uniqid()}>
+						<span>{element}</span>
+					</li>
+				))}
+			</ul>
+		);
 	}
-} */
+}
 
 class LineItem extends Component {
 	render() {
-		const text = this.props.text;
-		const subItems = this.props.subItems;
+		const { text, subItems } = this.props;
 		if (subItems) {
 			return (
 				<li className="line-item">
-					<div className>{text}</div>
-					<ul className="sub-list">
-						{subItems.map((element) => (
-							<li className="sub-item">{element} </li>
-						))}
-					</ul>
+					<span className="line-text">{text}</span>
+					<SubItemList subItems={subItems} />
 				</li>
 			);
 		}
