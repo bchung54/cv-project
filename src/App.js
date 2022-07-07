@@ -53,7 +53,7 @@ class App extends Component {
 				},
 				items: [
 					{
-						text: 'Created online bookstore',
+						text: 'Created totally legit online bookstore out of my garage',
 						subItems: ['Sold 10 copies of 2003 Physics textbook']
 					},
 					{
@@ -74,8 +74,8 @@ class App extends Component {
 						year: 2015
 					},
 					to: {
-						month: '',
-						year: 0
+						month: 'Jan',
+						year: 2015
 					}
 				},
 				location: {

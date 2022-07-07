@@ -44,15 +44,20 @@ class Section extends Component {
 			experiences: this.props.experiences
 		};
 	}
+	handleAddExp() {
+		this.setState();
+	}
+
 	render() {
 		const { title } = this.props;
 		const { experiences } = this.state;
+		experiences.sort((a, b) => b.timePeriod.to.year - a.timePeriod.to.year);
 		return (
 			<section>
 				<div className="section-heading">
 					<h2>{title}</h2>
 					<span>
-						<button>+Add Experience</button>
+						<button onClick={this.handleAddExp}>+Add Experience</button>
 					</span>
 				</div>
 				<hr />

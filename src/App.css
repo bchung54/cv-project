@@ -54,9 +54,14 @@ section > *:not(hr) {
 	font-style: italic;
 }
 
+.desc-item {
+	list-style-type: disc;
+	margin-left: 1rem;
+}
+
 .sub-list {
 	list-style-type: circle;
-	margin-left: 48px;
+	margin-left: 1.75rem;
 }
 
 h2 {

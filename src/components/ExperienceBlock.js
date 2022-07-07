@@ -3,48 +3,72 @@ import { AddButton } from './Buttons';
 import LineItem from './LineItem';
 import uniqid from 'uniqid';
 
-class EduHeading extends Component {
+class HeadingLeft extends Component {
 	render() {
-		const { placeName, subTitle, timePeriod, location } = this.props;
-		const { city, state } = location;
+		const { placeName, subTitle } = this.props;
 		return (
-			<div className="heading">
-				<div className="heading-left">
-					<h3 className="place-name">{placeName}</h3>
-					<div className="sub-title">{subTitle}</div>
-				</div>
+			<div className="heading-left">
+				<h3 className="place-name">{placeName}</h3>
+				<div className="sub-title">{subTitle}</div>
+			</div>
+		);
+	}
+}
+
+class TimeBlock extends Component {
+	render() {
+		const { timePeriod } = this.props;
+		return (
+			<h3 className="time-period">
+				{timePeriod.from.month} {timePeriod.from.year} - {timePeriod.to.month} {timePeriod.to.year}
+			</h3>
+		);
+	}
+}
+
+class TimeStamp extends Component {
+	render() {
+		const { timePeriod } = this.props;
+		return (
+			<h3 className="time-period">
+				{timePeriod.to.month} {timePeriod.to.year}
+			</h3>
+		);
+	}
+}
+
+class HeadingRight extends Component {
+	render() {
+		const { timePeriod, location } = this.props;
+		const { from, to } = timePeriod;
+		if (to.year === from.year && to.month === from.month) {
+			return (
 				<div className="heading-right">
-					<h3 className="time-period">
-						{timePeriod.from.month} {timePeriod.from.year}
-					</h3>
+					<TimeStamp timePeriod={timePeriod} />
 					<div className="location">
-						{city}, {state}
+						{location.city}, {location.state}
 					</div>
+				</div>
+			);
+		}
+		return (
+			<div className="heading-right">
+				<TimeBlock timePeriod={timePeriod} />
+				<div className="location">
+					{location.city}, {location.state}
 				</div>
 			</div>
 		);
 	}
 }
 
-class WorkHeading extends Component {
+class Heading extends Component {
 	render() {
 		const { placeName, subTitle, timePeriod, location } = this.props;
-		const { city, state } = location;
 		return (
 			<div className="heading">
-				<div className="heading-left">
-					<h3 className="place-name">{placeName}</h3>
-					<div className="sub-title">{subTitle}</div>
-				</div>
-				<div className="heading-right">
-					<h3 className="time-period">
-						{timePeriod.from.month} {timePeriod.from.year} - {timePeriod.to.month}{' '}
-						{timePeriod.to.year}
-					</h3>
-					<div className="location">
-						{city}, {state}
-					</div>
-				</div>
+				<HeadingLeft placeName={placeName} subTitle={subTitle} />
+				<HeadingRight timePeriod={timePeriod} location={location} />
 			</div>
 		);
 	}
@@ -56,24 +80,24 @@ class ExperienceBlock extends Component {
 		if (label === 'work-exp') {
 			return (
 				<div className={label}>
-					<WorkHeading
+					<Heading
 						placeName={placeName}
 						subTitle={subTitle}
 						timePeriod={timePeriod}
 						location={location}
 					/>
-					<div>
+					<ul className="desc-item">
 						{items.map((element) => (
 							<LineItem text={element.text} subItems={element.subItems} key={uniqid()} />
 						))}
-					</div>
+					</ul>
 					<AddButton text="+ Add Responsibility" />
 				</div>
 			);
 		}
 		return (
 			<div className={label}>
-				<EduHeading
+				<Heading
 					placeName={placeName}
 					subTitle={subTitle}
 					timePeriod={timePeriod}
