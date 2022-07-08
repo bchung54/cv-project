@@ -41,7 +41,7 @@ class HeadingRight extends Component {
 	render() {
 		const { timePeriod, location } = this.props;
 		const { from, to } = timePeriod;
-		if (to.year === from.year && to.month === from.month) {
+		if (to.year === from.year && to.month === from.month && typeof to.year === 'number') {
 			return (
 				<div className="heading-right">
 					<TimeStamp timePeriod={timePeriod} />
@@ -88,7 +88,12 @@ class ExperienceBlock extends Component {
 					/>
 					<ul className="desc-item">
 						{items.map((element) => (
-							<LineItem text={element.text} subItems={element.subItems} key={uniqid()} />
+							<LineItem
+								text={element.text}
+								subItems={element.subItems}
+								type={label}
+								key={uniqid()}
+							/>
 						))}
 					</ul>
 					<AddButton text="+ Add Responsibility" />
@@ -105,7 +110,7 @@ class ExperienceBlock extends Component {
 				/>
 				<div>
 					{items.map((element) => (
-						<LineItem text={element.text} subItems={element.subItems} key={uniqid()} />
+						<LineItem text={element.text} subItems={element.subItems} type={label} key={uniqid()} />
 					))}
 				</div>
 				<AddButton text="+ Add Description" />

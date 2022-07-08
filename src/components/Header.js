@@ -30,22 +30,17 @@ class ContactInfo extends Component {
 class Header extends Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			name: this.props.name,
-			currTitle: this.props.currTitle,
-			email: this.props.email,
-			phone: this.props.phone,
-			location: this.props.location
-		};
+		this.handleEdit = this.handleEdit.bind(this);
 	}
+	handleEdit() {}
+
 	render() {
-		const { name, currTitle, email, phone, location } = this.state;
+		const { name, currTitle, email, phone, location } = this.props.contact;
 
 		return (
 			<header>
 				<div className="header-main">
-					<h1 className="header-name">{name}</h1>
+					<input type="text" className="header-name" placeholder={name} />
 					<h3 className="header-title">{currTitle}</h3>
 				</div>
 				<div className="header-side">

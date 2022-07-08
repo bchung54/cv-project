@@ -1,3 +1,7 @@
+:root {
+	--header-color: rgb(98, 131, 163);
+}
+
 .App {
 	margin: 5rem 20vw;
 }
@@ -6,7 +10,7 @@ header {
 	display: flex;
 	justify-content: space-between;
 	padding: 1rem 2rem;
-	background-color: rgb(98, 131, 163);
+	background-color: var(--header-color);
 }
 
 /* Name and Current Job Title */
@@ -62,6 +66,16 @@ section > *:not(hr) {
 .sub-list {
 	list-style-type: circle;
 	margin-left: 1.75rem;
+}
+
+/* .new-exp-block {
+	display: none;
+} */
+
+input {
+	border: 0;
+	outline: 0;
+	background-color: var(--header-color);
 }
 
 h2 {

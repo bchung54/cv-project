@@ -19,7 +19,14 @@ class SubItemList extends Component {
 
 class LineItem extends Component {
 	render() {
-		const { text, subItems } = this.props;
+		const { text, subItems, type } = this.props;
+		if (type !== 'work-exp') {
+			return (
+				<li className="line-item">
+					<span className="line-text">{text}</span>
+				</li>
+			);
+		}
 		if (subItems) {
 			return (
 				<li className="line-item">
@@ -29,7 +36,12 @@ class LineItem extends Component {
 				</li>
 			);
 		}
-		return <li className="line-item">{text}</li>;
+		return (
+			<li className="line-item">
+				<span className="line-text">{text}</span>
+				<AddButton text="+ Add Detail" />
+			</li>
+		);
 	}
 }
 

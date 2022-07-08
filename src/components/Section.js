@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
 import ExperienceBlock from './ExperienceBlock';
+import uniqid from 'uniqid';
 
 export class Personal extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			title: this.props.title,
-			skills: this.props.skills,
-			interests: this.props.interests
-		};
-	}
 	render() {
-		const { title, skills, interests } = this.state;
+		const { title, skills, interests } = this.props;
 		return (
 			<section>
 				<h2>{title}</h2>
@@ -37,21 +29,42 @@ export class Personal extends Component {
 }
 
 class Section extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			experiences: this.props.experiences
-		};
-	}
 	handleAddExp() {
 		this.setState();
 	}
 
+	handleAddForm() {}
+
 	render() {
-		const { title } = this.props;
-		const { experiences } = this.state;
-		experiences.sort((a, b) => b.timePeriod.to.year - a.timePeriod.to.year);
+		const { title, experience } = this.props;
+		experience.sort((a, b) => b.timePeriod.to.year - a.timePeriod.to.year);
+		const timePlaceholder = {
+			from: {
+				month: 'Month',
+				year: 'Year'
+			},
+			to: {
+				month: 'Month',
+				year: 'Year'
+			}
+		};
+		const locationPlaceholder = {
+			city: 'City',
+			state: 'ST'
+		};
+		const itemsPlaceholder = [
+			{
+				text: 'Core Responsibility # 1',
+				subItems: [
+					'Sub-bullets are for more detail if needed, like key performance stats or a portfolio link.'
+				]
+			},
+			{ text: 'Core Responsibility # 2' }
+		];
+		let idPlaceholder = 'add-edu-block';
+		if (title === 'Work Experience') {
+			idPlaceholder = 'add-work-block';
+		}
 		return (
 			<section>
 				<div className="section-heading">
@@ -61,7 +74,7 @@ class Section extends Component {
 					</span>
 				</div>
 				<hr />
-				{experiences.map((element, id) => {
+				{experience.map((element) => {
 					return (
 						<ExperienceBlock
 							placeName={element.placeName}
@@ -70,10 +83,21 @@ class Section extends Component {
 							location={element.location}
 							items={element.items}
 							label={title === 'Work Experience' ? 'work-exp' : 'edu-exp'}
-							key={id}
+							key={uniqid()}
 						/>
 					);
 				})}
+				<div className="new-exp-block" id={idPlaceholder}>
+					<ExperienceBlock
+						placeName="Company Name"
+						subTitle="Job Title"
+						timePeriod={timePlaceholder}
+						location={locationPlaceholder}
+						items={itemsPlaceholder}
+						label={title === 'Work Experience' ? 'work-exp' : 'edu-exp'}
+						key={idPlaceholder}
+					/>
+				</div>
 			</section>
 		);
 	}
