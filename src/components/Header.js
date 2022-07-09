@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import HeaderEditForm from './Forms';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
@@ -30,9 +31,18 @@ class ContactInfo extends Component {
 class Header extends Component {
 	constructor(props) {
 		super(props);
-		this.handleEdit = this.handleEdit.bind(this);
+		this.handleHeaderEdit = this.handleHeaderEdit.bind(this);
+		this.displayEditForm = this.displayEditForm.bind(this);
 	}
-	handleEdit() {}
+	handleHeaderEdit(name, value) {
+		this.props.onHeaderTextChange(name, value);
+	}
+
+	displayEditForm(e) {
+		const header = e.target.parentElement;
+		Array.from(header.children).forEach((child) => (child.style.display = 'none'));
+		document.getElementById('header-form').style.display = 'flex';
+	}
 
 	render() {
 		const { name, currTitle, email, phone, location } = this.props.contact;
@@ -40,7 +50,7 @@ class Header extends Component {
 		return (
 			<header>
 				<div className="header-main">
-					<input type="text" className="header-name" placeholder={name} />
+					<div className="header-name">{name}</div>
 					<h3 className="header-title">{currTitle}</h3>
 				</div>
 				<div className="header-side">
@@ -48,6 +58,10 @@ class Header extends Component {
 					<ContactInfo type="phone" text={phone} />
 					<ContactInfo type="location" text={location} />
 				</div>
+				<button className="header-btn" onClick={this.displayEditForm}>
+					Edit
+				</button>
+				<HeaderEditForm contact={this.props.contact} onHeaderEdit={this.handleHeaderEdit} />
 			</header>
 		);
 	}

@@ -7,6 +7,7 @@
 }
 
 header {
+	position: relative;
 	display: flex;
 	justify-content: space-between;
 	padding: 1rem 2rem;
@@ -17,6 +18,10 @@ header {
 
 .header-name {
 	font-size: 3rem;
+}
+
+.header-title {
+	font-size: 1.25rem;
 }
 
 /* Contact Info */
@@ -32,6 +37,26 @@ header {
 
 .contact-icon {
 	text-align: center;
+}
+
+.contact-text {
+	font-size: 1.25rem;
+}
+
+.header-input-main, .header-input-side {
+	display: flex;
+	flex-direction: column;
+}
+
+.header-btn {
+	position: absolute;
+	right: 0.25rem;
+	bottom: 0.25rem;
+}
+
+#header-form {
+	justify-content: space-between;
+	align-items: center;
 }
 
 section > *:not(hr) {
@@ -75,6 +100,7 @@ section > *:not(hr) {
 input {
 	border: 0;
 	outline: 0;
+	border-bottom: 2px solid grey;
 	background-color: var(--header-color);
 }
 
