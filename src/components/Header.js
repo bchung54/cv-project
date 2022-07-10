@@ -34,8 +34,18 @@ class Header extends Component {
 		this.handleHeaderEdit = this.handleHeaderEdit.bind(this);
 		this.displayEditForm = this.displayEditForm.bind(this);
 	}
-	handleHeaderEdit(name, value) {
-		this.props.onHeaderTextChange(name, value);
+	handleHeaderEdit(label, text) {
+		this.props.onHeaderTextChange(label, text);
+	}
+
+	showEditBtn() {
+		const button = document.getElementById('header-edit');
+		button.style.display = 'block';
+	}
+
+	hideEditBtn() {
+		const button = document.getElementById('header-edit');
+		button.style.display = 'none';
 	}
 
 	displayEditForm(e) {
@@ -48,7 +58,7 @@ class Header extends Component {
 		const { name, currTitle, email, phone, location } = this.props.contact;
 
 		return (
-			<header>
+			<header onMouseEnter={this.showEditBtn} onMouseLeave={this.hideEditBtn}>
 				<div className="header-main">
 					<div className="header-name">{name}</div>
 					<h3 className="header-title">{currTitle}</h3>
@@ -58,7 +68,7 @@ class Header extends Component {
 					<ContactInfo type="phone" text={phone} />
 					<ContactInfo type="location" text={location} />
 				</div>
-				<button className="header-btn" onClick={this.displayEditForm}>
+				<button id="header-edit" className="header-btn" onClick={this.displayEditForm}>
 					Edit
 				</button>
 				<HeaderEditForm contact={this.props.contact} onHeaderEdit={this.handleHeaderEdit} />

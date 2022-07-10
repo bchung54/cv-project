@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class HeaderEditForm extends Component {
 	constructor(props) {
 		super(props);
-
 		this.handleHeaderTextChange = this.handleHeaderTextChange.bind(this);
 	}
 
@@ -15,7 +14,9 @@ class HeaderEditForm extends Component {
 		e.preventDefault();
 
 		const header = document.querySelector('header');
-		Array.from(header.children).forEach((child) => (child.style.display = 'block'));
+		Array.from(header.children)
+			.filter((child) => child.id !== 'header-edit')
+			.forEach((child) => (child.style.display = 'block'));
 		const headerForm = document.getElementById('header-form');
 		headerForm.style.display = 'none';
 	}
@@ -73,6 +74,38 @@ class HeaderEditForm extends Component {
 					/>
 				</div>
 				<button type="submit" id="header-submit" className="header-btn">
+					Submit
+				</button>
+			</form>
+		);
+	}
+}
+
+export class PersonalEditForm extends Component {
+	constructor(props) {
+		super(props);
+		this.handlePersonalTextChange = this.handlePersonalTextChange.bind(this);
+	}
+
+	handlePersonalTextChange(e) {
+		const arr = e.target.value.split('.');
+		arr.forEach((e) => e.trim());
+		this.props.onPersonalEdit(e.target.name, arr);
+	}
+
+	handleSubmit(e) {
+		e.preventDefault();
+		const content = e.target.previousElementSibling;
+		e.target.style.display = 'none';
+		content.style.display = 'inline-block';
+	}
+
+	render() {
+		const { label, text } = this.props;
+		return (
+			<form className="personals-form" onSubmit={this.handleSubmit} autoComplete="off">
+				<input type="text" name={label} value={text} onChange={this.handlePersonalTextChange} />
+				<button type="submit" className="personals-submit">
 					Submit
 				</button>
 			</form>

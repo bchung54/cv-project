@@ -14,32 +14,49 @@ class App extends Component {
 		};
 
 		this.handleHeaderEdit = this.handleHeaderEdit.bind(this);
+		this.handlePersonalEdit = this.handlePersonalEdit.bind(this);
 	}
 
-	handleHeaderEdit(label, newValue) {
-		let copy = {...this.state.contact};
+	handleHeaderEdit(label, text) {
+		let contactCopy = { ...this.state.contact };
 		switch (label) {
 			case 'name':
-				copy.name = newValue;
+				contactCopy.name = text;
 				break;
 			case 'currTitle':
-				copy.currTitle = newValue;
+				contactCopy.currTitle = text;
 				break;
 			case 'email':
-				copy.email = newValue;
+				contactCopy.email = text;
 				break;
 			case 'phone':
-				copy.phone = newValue;
+				contactCopy.phone = text;
 				break;
 			case 'location':
-				copy.location = newValue;
+				contactCopy.location = text;
 				break;
 			default:
 				break;
-
 		}
 		this.setState({
-			contact: copy
+			contact: contactCopy
+		});
+	}
+
+	handlePersonalEdit(label, arr) {
+		let personalsCopy = { ...this.state.personals };
+		switch (label) {
+			case 'skills':
+				personalsCopy.skills = arr;
+				break;
+			case 'interests':
+				personalsCopy.interests = arr;
+				break;
+			default:
+				break;
+		}
+		this.setState({
+			personals: personalsCopy
 		});
 	}
 	render() {
@@ -51,8 +68,8 @@ class App extends Component {
 				<Section title="Education" experience={experience.education} />
 				<Personal
 					title="Skills & Interests"
-					skills={personals.skills}
-					interests={personals.interests}
+					personals={personals}
+					onPersonalTextChange={this.handlePersonalEdit}
 				/>
 			</div>
 		);
