@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { AddButton } from './Buttons';
 import LineItem from './LineItem';
 import uniqid from 'uniqid';
 
@@ -75,45 +74,73 @@ class Heading extends Component {
 }
 
 class ExperienceBlock extends Component {
+	constructor(props) {
+		super(props);
+		this.handleExperienceTextChange = this.handleExperienceTextChange.bind(this);
+		this.displayEditForm = this.displayEditForm.bind(this);
+	}
+
+	handleExperienceTextChange(e) {
+		this.props.onExperienceTextChange(e);
+	}
+
+	displayEditForm(e) {
+		const formCategory = e.target.id.split('-')[1] + '-form';
+		const form = document.getElementById(formCategory);
+		form.style.display = 'block';
+		this.props.onEditClick(e);
+	}
+
 	render() {
-		const { placeName, subTitle, timePeriod, location, items, label } = this.props;
-		if (label === 'work-exp') {
+		const { exp, label, expIndex } = this.props;
+		const editID = 'edit-' + label + '-' + expIndex;
+		if (label === 'work') {
 			return (
 				<div className={label}>
-					<Heading
-						placeName={placeName}
-						subTitle={subTitle}
-						timePeriod={timePeriod}
-						location={location}
-					/>
-					<ul className="desc-item">
-						{items.map((element) => (
-							<LineItem
-								text={element.text}
-								subItems={element.subItems}
-								type={label}
-								key={uniqid()}
-							/>
-						))}
-					</ul>
-					<AddButton text="+ Add Responsibility" />
+					<div className="exp-content">
+						<Heading
+							placeName={exp.placeName}
+							subTitle={exp.subTitle}
+							timePeriod={exp.timePeriod}
+							location={exp.location}
+							index={expIndex}
+						/>
+						<ul className="desc-item">
+							{exp.items.map((element, index) => (
+								<LineItem
+									key={uniqid()}
+									text={element}
+									label={label}
+									expIndex={expIndex}
+									itemIndex={index}
+								/>
+							))}
+						</ul>
+						<button className="exp-edit-btn" id={editID} onClick={this.displayEditForm}>
+							Edit
+						</button>
+					</div>
 				</div>
 			);
 		}
 		return (
 			<div className={label}>
-				<Heading
-					placeName={placeName}
-					subTitle={subTitle}
-					timePeriod={timePeriod}
-					location={location}
-				/>
-				<div>
-					{items.map((element) => (
-						<LineItem text={element.text} subItems={element.subItems} type={label} key={uniqid()} />
-					))}
+				<div className="exp-content">
+					<Heading
+						placeName={exp.placeName}
+						subTitle={exp.subTitle}
+						timePeriod={exp.timePeriod}
+						location={exp.location}
+					/>
+					<div>
+						{exp.items.map((element) => (
+							<LineItem text={element} key={uniqid()} />
+						))}
+					</div>
+					<button className="exp-edit-btn" id={editID} onClick={this.displayEditForm}>
+						Edit
+					</button>
 				</div>
-				<AddButton text="+ Add Description" />
 			</div>
 		);
 	}

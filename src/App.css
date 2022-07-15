@@ -117,6 +117,10 @@ h3 {
 	font-size: 1.25rem;
 }
 
+.exp-form {
+	display: none;
+}
+
 .personals-subsection {
 	margin-bottom: 0.25rem;
 }

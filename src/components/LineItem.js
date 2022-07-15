@@ -1,45 +1,12 @@
 import React, { Component } from 'react';
-import { AddButton } from './Buttons';
-import uniqid from 'uniqid';
-
-class SubItemList extends Component {
-	render() {
-		const { subItems } = this.props;
-		return (
-			<ul className="sub-list">
-				{subItems.map((element) => (
-					<li className="sub-item" key={uniqid()}>
-						<span>{element}</span>
-					</li>
-				))}
-			</ul>
-		);
-	}
-}
 
 class LineItem extends Component {
 	render() {
-		const { text, subItems, type } = this.props;
-		if (type !== 'work-exp') {
-			return (
-				<li className="line-item">
-					<span className="line-text">{text}</span>
-				</li>
-			);
-		}
-		if (subItems) {
-			return (
-				<li className="line-item">
-					<span className="line-text">{text}</span>
-					<AddButton text="+ Add Detail" />
-					<SubItemList subItems={subItems} />
-				</li>
-			);
-		}
+		const { text, label, expIndex, Itemindex } = this.props;
+		const id = [label, 'exp', expIndex, 'item', Itemindex].join('-');
 		return (
-			<li className="line-item">
+			<li className="line-item" id={id}>
 				<span className="line-text">{text}</span>
-				<AddButton text="+ Add Detail" />
 			</li>
 		);
 	}

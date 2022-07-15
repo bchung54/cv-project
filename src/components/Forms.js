@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class HeaderEditForm extends Component {
+export class HeaderEditForm extends Component {
 	constructor(props) {
 		super(props);
 		this.handleHeaderTextChange = this.handleHeaderTextChange.bind(this);
@@ -81,6 +81,102 @@ class HeaderEditForm extends Component {
 	}
 }
 
+export class ExperienceEditForm extends Component {
+	constructor(props) {
+		super(props);
+		this.handleInputTextChange = this.handleInputTextChange.bind(this);
+	}
+
+	handleInputTextChange(e) {
+		this.props.onExperienceChange(e);
+	}
+
+	handleSubmit(e) {
+		e.preventDefault();
+		e.target.style.display = 'none';
+	}
+
+	render() {
+		const exp = this.props.experiences[this.props.editIndex];
+		const id = this.props.label + '-form';
+		return (
+			<form className="exp-form" id={id} onSubmit={this.handleSubmit} autoComplete="off">
+				<InputHeading
+					placeName={exp.placeName}
+					subTitle={exp.subTitle}
+					timePeriod={exp.timePeriod}
+					location={exp.location}
+					onInputEdit={this.handleInputTextChange}
+				/>
+				<input
+					type="text"
+					name="item-1"
+					value={exp.items[0]}
+					onChange={this.handleInputTextChange}
+				/>
+				<input
+					type="text"
+					name="item-2"
+					value={exp.items[1]}
+					onChange={this.handleInputTextChange}
+				/>
+				<input
+					type="text"
+					name="item-3"
+					value={exp.items[2]}
+					onChange={this.handleInputTextChange}
+				/>
+				<button type="submit">Confirm</button>
+			</form>
+		);
+	}
+}
+
+class InputHeading extends Component {
+	constructor(props) {
+		super(props);
+		this.handleInputTextChange = this.handleInputTextChange.bind(this);
+	}
+	handleInputTextChange(e) {
+		this.props.onInputEdit(e);
+	}
+	render() {
+		const { placeName, subTitle, timePeriod, location } = this.props;
+		const timePeriodText =
+			timePeriod.from.month +
+			' ' +
+			timePeriod.from.year +
+			' - ' +
+			timePeriod.to.month +
+			' ' +
+			timePeriod.to.year;
+		const locationText = location.city + ', ' + location.state;
+		return (
+			<div>
+				<input
+					type="text"
+					name="placeName"
+					value={placeName}
+					onChange={this.handleInputTextChange}
+				/>
+				<input type="text" name="subTitle" value={subTitle} onChange={this.handleInputTextChange} />
+				<input
+					type="text"
+					name="timePeriod"
+					value={timePeriodText}
+					onChange={this.handleInputTextChange}
+				/>
+				<input
+					type="text"
+					name="location"
+					value={locationText}
+					onChange={this.handleInputTextChange}
+				/>
+			</div>
+		);
+	}
+}
+
 export class PersonalEditForm extends Component {
 	constructor(props) {
 		super(props);
@@ -112,5 +208,3 @@ export class PersonalEditForm extends Component {
 		);
 	}
 }
-
-export default HeaderEditForm;

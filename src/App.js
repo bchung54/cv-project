@@ -1,7 +1,8 @@
 import './App.css';
 import React, { Component } from 'react';
 import Header from './components/Header';
-import Section, { Personal } from './components/Section';
+import Section from './components/Section';
+import Personal from './components/Personal';
 
 class App extends Component {
 	constructor(props) {
@@ -14,6 +15,7 @@ class App extends Component {
 		};
 
 		this.handleHeaderEdit = this.handleHeaderEdit.bind(this);
+		this.handleExperienceEdit = this.handleExperienceEdit.bind(this);
 		this.handlePersonalEdit = this.handlePersonalEdit.bind(this);
 	}
 
@@ -43,6 +45,56 @@ class App extends Component {
 		});
 	}
 
+	handleExperienceEdit(e, label, index) {
+		let category;
+		label.includes('work') ? (category = 'work') : (category = 'edu');
+		const toEdit = e.target.name;
+		const text = e.target.value;
+		let expCopy = { ...this.state.experience };
+		let expToEdit;
+		if (category === 'work') {
+			expToEdit = expCopy.work[index];
+		} else {
+			expToEdit = expCopy.education[index];
+		}
+
+		switch (toEdit) {
+			case 'placeName':
+				expToEdit.placeName = text;
+				break;
+			case 'subTitle':
+				expToEdit.subTitle = text;
+				break;
+			case 'timePeriod':
+				const timeArray = text.split(' ');
+				expToEdit.timePeriod = {
+					from: {
+						month: timeArray[0],
+						year: timeArray[1]
+					},
+					to: {
+						month: timeArray[3],
+						year: timeArray[4]
+					}
+				};
+				break;
+			case 'location':
+				const locArray = text.split(', ');
+				expToEdit.location = {
+					city: locArray[0],
+					state: locArray[1]
+				};
+				break;
+			default:
+				const itemIndex = parseInt(toEdit.split('-')[1]);
+				expToEdit.items[itemIndex] = text;
+				break;
+		}
+		this.setState({
+			experience: expCopy
+		});
+	}
+
 	handlePersonalEdit(label, arr) {
 		let personalsCopy = { ...this.state.personals };
 		switch (label) {
@@ -64,8 +116,16 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Header contact={contact} onHeaderTextChange={this.handleHeaderEdit} />
-				<Section title="Work Experience" experience={experience.work} />
-				<Section title="Education" experience={experience.education} />
+				<Section
+					title="Work Experience"
+					experiences={experience.work}
+					onExperienceTextChange={this.handleExperienceEdit}
+				/>
+				<Section
+					title="Education"
+					experiences={experience.education}
+					onExperienceTextChange={this.handleExperienceEdit}
+				/>
 				<Personal
 					title="Skills & Interests"
 					personals={personals}

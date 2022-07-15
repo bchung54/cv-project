@@ -30,16 +30,7 @@ const APPLICANT = {
 					city: 'Denver',
 					state: 'CO'
 				},
-				items: [
-					{
-						text: 'Manage facilities',
-						subItems: ['Open facilities', 'Close facilities']
-					},
-					{
-						text: 'Park cars',
-						subItems: ['Drive cars fast', 'Fit tight spaces']
-					}
-				]
+				items: ['Manage facilities', 'Park cars']
 			},
 			{
 				placeName: 'Amazon',
@@ -58,16 +49,7 @@ const APPLICANT = {
 					city: 'New York City',
 					state: 'NY'
 				},
-				items: [
-					{
-						text: 'Created totally legit online bookstore out of my garage',
-						subItems: ['Sold 10 copies of 2003 Physics textbook']
-					},
-					{
-						text: 'Make money',
-						subItems: ['Gain market share by undercutting all third party vendors']
-					}
-				]
+				items: ['Created totally legit online bookstore out of my garage', 'Make money']
 			}
 		],
 		education: [
@@ -89,15 +71,9 @@ const APPLICANT = {
 					state: 'MA'
 				},
 				items: [
-					{
-						text: 'List your honors like summa cum laude or Economics Honors Society'
-					},
-					{
-						text: 'Studied abroad in City, Country during spring/fall 20YY semester'
-					},
-					{
-						text: 'Any other fun stuff like varsity sports, fraternity/sorority, or something that gives you a little color'
-					}
+					'List your honors like summa cum laude or Economics Honors Society',
+					'Studied abroad in City, Country during spring/fall 20YY semester',
+					'Any other fun stuff like varsity sports, fraternity/sorority, or something that gives you a little color'
 				]
 			}
 		]

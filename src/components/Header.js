@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HeaderEditForm from './Forms';
+import { HeaderEditForm } from './Forms';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
