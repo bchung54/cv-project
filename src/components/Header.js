@@ -31,11 +31,38 @@ class ContactInfo extends Component {
 class Header extends Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			contact: this.props.contact
+		};
 		this.handleHeaderEdit = this.handleHeaderEdit.bind(this);
 		this.displayEditForm = this.displayEditForm.bind(this);
 	}
+
 	handleHeaderEdit(label, text) {
-		this.props.onHeaderTextChange(label, text);
+		let contactCopy = { ...this.state.contact };
+		switch (label) {
+			case 'name':
+				contactCopy.name = text;
+				break;
+			case 'currTitle':
+				contactCopy.currTitle = text;
+				break;
+			case 'email':
+				contactCopy.email = text;
+				break;
+			case 'phone':
+				contactCopy.phone = text;
+				break;
+			case 'location':
+				contactCopy.location = text;
+				break;
+			default:
+				break;
+		}
+		this.setState({
+			contact: contactCopy
+		});
 	}
 
 	showEditBtn() {

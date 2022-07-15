@@ -7,15 +7,60 @@ class Section extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			experience: this.props.experiences,
 			editIndex: 0
 		};
-		this.handleExperienceTextChange = this.handleExperienceTextChange.bind(this);
 		this.handleEditClick = this.handleEditClick.bind(this);
 	}
 
-	handleExperienceTextChange(e) {
-		const label = () => (this.props.title === 'Work Experience' ? 'work' : 'edu');
-		this.props.onExperienceTextChange(e, label(), this.state.editIndex);
+	handleExperienceEdit(e) {
+		const category = () => (this.props.title === 'Work Experience' ? 'work' : 'edu');
+		const index = this.state.editIndex;
+		const toEdit = e.target.name;
+		const text = e.target.value;
+		let expCopy = { ...this.state.experience };
+		let expToEdit;
+		if (category === 'work') {
+			expToEdit = expCopy.work[index];
+		} else {
+			expToEdit = expCopy.education[index];
+		}
+
+		switch (toEdit) {
+			case 'placeName':
+				expToEdit.placeName = text;
+				break;
+			case 'subTitle':
+				expToEdit.subTitle = text;
+				break;
+			case 'timePeriod':
+				const timeArray = text.split(' ');
+				expToEdit.timePeriod = {
+					from: {
+						month: timeArray[0],
+						year: timeArray[1]
+					},
+					to: {
+						month: timeArray[3],
+						year: timeArray[4]
+					}
+				};
+				break;
+			case 'location':
+				const locArray = text.split(', ');
+				expToEdit.location = {
+					city: locArray[0],
+					state: locArray[1]
+				};
+				break;
+			default:
+				const itemIndex = parseInt(toEdit.split('-')[1]);
+				expToEdit.items[itemIndex] = text;
+				break;
+		}
+		this.setState({
+			experience: expCopy
+		});
 	}
 
 	handleEditClick(e) {

@@ -4,11 +4,28 @@ import { PersonalEditForm } from './Forms';
 class Personal extends Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			personals: this.props.personals
+		};
 		this.handlePersonalEdit = this.handlePersonalEdit.bind(this);
 	}
 
 	handlePersonalEdit(label, arr) {
-		this.props.onPersonalTextChange(label, arr);
+		let personalsCopy = { ...this.state.personals };
+		switch (label) {
+			case 'skills':
+				personalsCopy.skills = arr;
+				break;
+			case 'interests':
+				personalsCopy.interests = arr;
+				break;
+			default:
+				break;
+		}
+		this.setState({
+			personals: personalsCopy
+		});
 	}
 
 	showEditBtn(e) {
