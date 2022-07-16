@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../styles/section.css';
 import ExperienceBlock from './ExperienceBlock';
 import uniqid from 'uniqid';
 import { AddExperienceForm, ExperienceEditForm } from './Forms';
@@ -31,10 +32,12 @@ class Section extends Component {
 		const timePeriodArray = e.target.timePeriod.value.split(' ');
 		const locationArray = e.target.location.value.split(', ');
 		const items = [e.target['item-1'].value, e.target['item-2'].value, e.target['item-3'].value];
+		let experiences = [...this.state.experience];
+
 		items.forEach((element, index) => {
 			element ? (items[index] = element) : (items[index] = '');
 		});
-		let experiences = [...this.state.experience];
+
 		experiences.push({
 			placeName: placeName,
 			subTitle: subTitle,
@@ -121,13 +124,13 @@ class Section extends Component {
 			<section>
 				<div className="section-heading">
 					<h2>{title}</h2>
-					<span>
+					<span className="exp-add">
 						<button className="exp-add-btn" onClick={this.toggleAddExp}>
 							+Add Experience
 						</button>
 					</span>
 				</div>
-				{add && <AddExperienceForm onAddSubmit={this.handleAddSubmit} />}
+				{add && <AddExperienceForm title={title} onAddSubmit={this.handleAddSubmit} />}
 				<hr />
 				{experience.map((element, index) => {
 					return (
@@ -143,9 +146,9 @@ class Section extends Component {
 				})}
 				<ExperienceEditForm
 					experiences={experience}
-					onExperienceChange={this.handleExperienceEdit}
 					editIndex={editIndex}
 					label={label()}
+					onExperienceChange={this.handleExperienceEdit}
 				/>
 			</section>
 		);

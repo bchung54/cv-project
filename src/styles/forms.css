@@ -1,0 +1,67 @@
+:root {
+	--header-color: rgb(98, 131, 163);
+}
+
+form {
+	background-color: var(--header-color);
+}
+
+.personals-form {
+	display: none;
+}
+
+form > * {
+    margin-bottom: 12px;
+}
+
+input {
+	border: 0;
+	outline: 0;
+	border-bottom: 2px solid grey;
+}
+
+/* Header Form */
+.header-form {
+	justify-content: space-between;
+	align-items: center;
+}
+
+.header-input-main, .header-input-side {
+	display: flex;
+	flex-direction: column;
+}
+
+/* Experience Form */
+.exp-form {
+	display: none;
+}
+
+.exp-form > input {
+	width: 100%;
+}
+
+.exp-confirm {
+    margin-left: 85%;
+}
+
+.edit-form-heading {
+	display: flex;
+	justify-content: space-between;
+}
+
+.edit-form-heading > * {
+	display: flex;
+	flex-direction: column;
+}
+
+.add-form {
+    position: absolute;
+    right: 0;
+    width: 40%;
+    background-color: var(--header-color);
+    z-index: 1;
+}
+
+.add-form > input {
+    width: 100%;
+}

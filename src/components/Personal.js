@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../styles/personal.css';
 import { PersonalEditForm } from './Forms';
 
 class Personal extends Component {
@@ -6,6 +7,7 @@ class Personal extends Component {
 		super(props);
 
 		this.state = {
+			title: this.props.title,
 			personals: this.props.personals
 		};
 		this.handlePersonalEdit = this.handlePersonalEdit.bind(this);
@@ -51,7 +53,7 @@ class Personal extends Component {
 	}
 
 	render() {
-		const { title, personals } = this.props;
+		const { title, personals } = this.state;
 		const skillsContent = personals.skills.join(', ');
 		const interestsContent = personals.interests.join(', ');
 		return (

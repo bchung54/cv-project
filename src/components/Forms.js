@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../styles/forms.css';
 
 export class HeaderEditForm extends Component {
 	constructor(props) {
@@ -15,16 +16,16 @@ export class HeaderEditForm extends Component {
 
 		const header = document.querySelector('header');
 		Array.from(header.children)
-			.filter((child) => child.id !== 'header-edit')
+			.filter((child) => !child.classList.contains('header-edit'))
 			.forEach((child) => (child.style.display = 'block'));
-		const headerForm = document.getElementById('header-form');
+		const headerForm = document.querySelector('.header-form');
 		headerForm.style.display = 'none';
 	}
 	render() {
 		const { name, currTitle, email, phone, location } = this.props.contact;
 		return (
 			<form
-				id="header-form"
+				className="header-form"
 				onSubmit={this.handleSubmit}
 				style={{ display: 'none' }}
 				autoComplete="off"
@@ -73,7 +74,7 @@ export class HeaderEditForm extends Component {
 						onChange={this.handleHeaderTextChange}
 					/>
 				</div>
-				<button type="submit" id="header-submit" className="header-btn">
+				<button type="submit" className="header-submit header-btn">
 					Submit
 				</button>
 			</form>
@@ -152,27 +153,60 @@ class InputHeading extends Component {
 			timePeriod.to.year;
 		const locationText = location.city + ', ' + location.state;
 		return (
-			<div>
-				<input
-					type="text"
-					name="placeName"
-					value={placeName}
-					onChange={this.handleInputTextChange}
-				/>
-				<input type="text" name="subTitle" value={subTitle} onChange={this.handleInputTextChange} />
-				<input
-					type="text"
-					name="timePeriod"
-					value={timePeriodText}
-					onChange={this.handleInputTextChange}
-				/>
-				<input
-					type="text"
-					name="location"
-					value={locationText}
-					onChange={this.handleInputTextChange}
-				/>
+			<div className="edit-form-heading">
+				<div className="edit-form-left">
+					<input
+						type="text"
+						name="placeName"
+						value={placeName}
+						onChange={this.handleInputTextChange}
+					/>
+					<input
+						type="text"
+						name="subTitle"
+						value={subTitle}
+						onChange={this.handleInputTextChange}
+					/>
+				</div>
+				<div className="edit-form-right">
+					<input
+						type="text"
+						name="timePeriod"
+						value={timePeriodText}
+						onChange={this.handleInputTextChange}
+					/>
+					<input
+						type="text"
+						name="location"
+						value={locationText}
+						onChange={this.handleInputTextChange}
+					/>
+				</div>
 			</div>
+		);
+	}
+}
+
+export class AddExperienceForm extends Component {
+	render() {
+		return (
+			<form className="add-form" onSubmit={this.props.onAddSubmit}>
+				<h3>Add {this.props.title}</h3>
+				<input type="text" name="placeName" placeholder="Add company" />
+				<input type="text" name="subTitle" placeholder="Add job title" />
+				<input type="text" name="timePeriod" placeholder="Month YYYY - Month YYYY" />
+				<input type="text" name="location" placeholder="City, ST" />
+				<input
+					type="text"
+					name="item-1"
+					placeholder="Add description such as core responsibilities"
+				/>
+				<input type="text" name="item-2" placeholder="Core Responsibility #2" />
+				<input type="text" name="item-3" placeholder="Core Responsibility #3" />
+				<button type="submit" className="exp-confirm">
+					Confirm
+				</button>
+			</form>
 		);
 	}
 }
@@ -204,27 +238,6 @@ export class PersonalEditForm extends Component {
 				<button type="submit" className="personals-submit">
 					Submit
 				</button>
-			</form>
-		);
-	}
-}
-
-export class AddExperienceForm extends Component {
-	render() {
-		return (
-			<form className="add-form" onSubmit={this.props.onAddSubmit}>
-				<input type="text" name="placeName" placeholder="Add company" />
-				<input type="text" name="subTitle" placeholder="Add job title" />
-				<input type="text" name="timePeriod" placeholder="Month YYYY - Month YYYY" />
-				<input type="text" name="location" placeholder="City, ST" />
-				<input
-					type="text"
-					name="item-1"
-					placeholder="Add description such as core responsibilities"
-				/>
-				<input type="text" name="item-2" placeholder="Core Responsibility #2" />
-				<input type="text" name="item-3" placeholder="Core Responsibility #3" />
-				<button type="submit">Confirm</button>
 			</form>
 		);
 	}

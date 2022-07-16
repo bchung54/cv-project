@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { HeaderEditForm } from './Forms';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import '../styles/header.css';
 
 class ContactInfo extends Component {
 	render() {
@@ -66,23 +67,23 @@ class Header extends Component {
 	}
 
 	showEditBtn() {
-		const button = document.getElementById('header-edit');
+		const button = document.querySelector('.header-edit');
 		button.style.display = 'block';
 	}
 
 	hideEditBtn() {
-		const button = document.getElementById('header-edit');
+		const button = document.querySelector('.header-edit');
 		button.style.display = 'none';
 	}
 
 	displayEditForm(e) {
 		const header = e.target.parentElement;
 		Array.from(header.children).forEach((child) => (child.style.display = 'none'));
-		document.getElementById('header-form').style.display = 'flex';
+		document.querySelector('.header-form').style.display = 'flex';
 	}
 
 	render() {
-		const { name, currTitle, email, phone, location } = this.props.contact;
+		const { name, currTitle, email, phone, location } = this.state.contact;
 
 		return (
 			<header onMouseEnter={this.showEditBtn} onMouseLeave={this.hideEditBtn}>
@@ -95,10 +96,10 @@ class Header extends Component {
 					<ContactInfo type="phone" text={phone} />
 					<ContactInfo type="location" text={location} />
 				</div>
-				<button id="header-edit" className="header-btn" onClick={this.displayEditForm}>
+				<button className="header-edit header-btn" onClick={this.displayEditForm}>
 					Edit
 				</button>
-				<HeaderEditForm contact={this.props.contact} onHeaderEdit={this.handleHeaderEdit} />
+				<HeaderEditForm contact={this.state.contact} onHeaderEdit={this.handleHeaderEdit} />
 			</header>
 		);
 	}

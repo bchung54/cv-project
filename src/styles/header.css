@@ -1,0 +1,40 @@
+:root {
+	--header-color: rgb(98, 131, 163);
+}
+
+.header-name {
+	font-size: 3rem;
+}
+
+.header-title {
+	font-size: 1.25rem;
+}
+
+.header-side {
+	text-align: left;
+}
+
+/* Contact Info */
+.contact-item {
+	display: grid;
+	grid-template-columns: 3rem auto;
+	padding: 0.1rem;
+}
+
+.contact-icon {
+	text-align: center;
+}
+
+.contact-text {
+	font-size: 1.25rem;
+}
+
+.header-btn {
+	position: absolute;
+	right: 0.25rem;
+	bottom: 0.25rem;
+}
+
+.header-edit {
+	display: none;
+}

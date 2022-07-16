@@ -1,0 +1,16 @@
+.personals-subsection {
+	margin-bottom: 0.25rem;
+}
+
+.personals-label {
+	font-weight: bold;
+}
+
+.personals-content {
+	display: inline;
+	padding: 0.5rem 0;
+}
+
+.personals-btn {
+	display: none;
+}

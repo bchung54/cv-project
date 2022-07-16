@@ -1,0 +1,57 @@
+section > *:not(hr) {
+	padding: 0 2rem;
+	padding-top: 0.3rem;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading {
+	display: flex;
+	justify-content: space-between;
+}
+
+.heading-right {
+	text-align: right;
+}
+
+.sub-title {
+	font-style: italic;
+}
+
+.desc-item {
+	list-style-type: disc;
+	margin-left: 1rem;
+}
+
+.sub-list {
+	list-style-type: circle;
+	margin-left: 1.75rem;
+}
+
+.exp-edit-btn {
+	display: none;
+}
+
+.exp-content {
+	position: relative;
+}
+
+.exp-content:hover .exp-edit-btn {
+	position: absolute;
+	display: block;
+	z-index: 1;
+	left: 95%;
+	bottom: 0;
+}
+
+.exp-add-btn {
+	display: none;
+}
+
+section:hover .exp-add-btn {
+	display: block;
+}
