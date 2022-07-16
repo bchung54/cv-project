@@ -106,14 +106,8 @@ class ExperienceBlock extends Component {
 							index={expIndex}
 						/>
 						<ul className="desc-item">
-							{exp.items.map((element, index) => (
-								<LineItem
-									key={uniqid()}
-									text={element}
-									label={label}
-									expIndex={expIndex}
-									itemIndex={index}
-								/>
+							{exp.items.map((element) => (
+								<LineItem key={uniqid()} text={element} />
 							))}
 						</ul>
 						<button className="exp-edit-btn" id={editID} onClick={this.displayEditForm}>

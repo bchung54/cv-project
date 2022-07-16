@@ -1,30 +1,79 @@
 import React, { Component } from 'react';
 import ExperienceBlock from './ExperienceBlock';
 import uniqid from 'uniqid';
-import { ExperienceEditForm } from './Forms';
+import { AddExperienceForm, ExperienceEditForm } from './Forms';
 
 class Section extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			title: this.props.title,
 			experience: this.props.experiences,
+			add: false,
 			editIndex: 0
 		};
+		this.toggleAddExp = this.toggleAddExp.bind(this);
+		this.handleAddSubmit = this.handleAddSubmit.bind(this);
 		this.handleEditClick = this.handleEditClick.bind(this);
+		this.handleExperienceEdit = this.handleExperienceEdit.bind(this);
+	}
+
+	toggleAddExp() {
+		this.setState((prevState) => ({
+			add: !prevState.add
+		}));
+	}
+
+	handleAddSubmit(e) {
+		e.preventDefault();
+		const placeName = e.target.placeName.value;
+		const subTitle = e.target.subTitle.value;
+		const timePeriodArray = e.target.timePeriod.value.split(' ');
+		const locationArray = e.target.location.value.split(', ');
+		const items = [e.target['item-1'].value, e.target['item-2'].value, e.target['item-3'].value];
+		items.forEach((element, index) => {
+			element ? (items[index] = element) : (items[index] = '');
+		});
+		let experiences = [...this.state.experience];
+		experiences.push({
+			placeName: placeName,
+			subTitle: subTitle,
+			timePeriod: {
+				from: {
+					month: timePeriodArray[0],
+					year: parseInt(timePeriodArray[1])
+				},
+				to: {
+					month: timePeriodArray[3],
+					year: parseInt(timePeriodArray[4])
+				}
+			},
+			location: {
+				city: locationArray[0],
+				state: locationArray[1]
+			},
+			items: items
+		});
+
+		this.setState({
+			experience: experiences
+		});
+		this.toggleAddExp();
+		e.target.reset();
+	}
+
+	handleEditClick(e) {
+		this.setState({
+			editIndex: parseInt(e.target.id.split('-')[2])
+		});
 	}
 
 	handleExperienceEdit(e) {
-		const category = () => (this.props.title === 'Work Experience' ? 'work' : 'edu');
 		const index = this.state.editIndex;
 		const toEdit = e.target.name;
 		const text = e.target.value;
-		let expCopy = { ...this.state.experience };
-		let expToEdit;
-		if (category === 'work') {
-			expToEdit = expCopy.work[index];
-		} else {
-			expToEdit = expCopy.education[index];
-		}
+		const expCopy = [...this.state.experience];
+		const expToEdit = expCopy[index];
 
 		switch (toEdit) {
 			case 'placeName':
@@ -55,7 +104,8 @@ class Section extends Component {
 				break;
 			default:
 				const itemIndex = parseInt(toEdit.split('-')[1]);
-				expToEdit.items[itemIndex] = text;
+				console.log(expToEdit.items);
+				expToEdit.items[itemIndex - 1] = text;
 				break;
 		}
 		this.setState({
@@ -63,41 +113,38 @@ class Section extends Component {
 		});
 	}
 
-	handleEditClick(e) {
-		this.setState({
-			editIndex: parseInt(e.target.id.split('-')[2])
-		});
-	}
-
 	render() {
-		const { title, experiences } = this.props;
+		const { title, experience, add, editIndex } = this.state;
 		const label = () => (title === 'Work Experience' ? 'work' : 'edu');
-		experiences.sort((a, b) => b.timePeriod.to.year - a.timePeriod.to.year);
+		Array.from(experience).sort((a, b) => b.timePeriod.to.year - a.timePeriod.to.year);
 		return (
 			<section>
 				<div className="section-heading">
 					<h2>{title}</h2>
 					<span>
-						<button onClick={this.handleAddExp}>+Add Experience</button>
+						<button className="exp-add-btn" onClick={this.toggleAddExp}>
+							+Add Experience
+						</button>
 					</span>
 				</div>
+				{add && <AddExperienceForm onAddSubmit={this.handleAddSubmit} />}
 				<hr />
-				{experiences.map((element, index) => {
+				{experience.map((element, index) => {
 					return (
 						<ExperienceBlock
 							exp={element}
 							label={label()}
 							expIndex={index}
-							onExperienceTextChange={this.handleExperienceTextChange}
+							onExperienceTextChange={this.handleExperienceEdit}
 							onEditClick={this.handleEditClick}
 							key={uniqid()}
 						/>
 					);
 				})}
 				<ExperienceEditForm
-					experiences={experiences}
-					onExperienceChange={this.handleExperienceTextChange}
-					editIndex={this.state.editIndex}
+					experiences={experience}
+					onExperienceChange={this.handleExperienceEdit}
+					editIndex={editIndex}
 					label={label()}
 				/>
 			</section>

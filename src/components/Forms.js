@@ -208,3 +208,24 @@ export class PersonalEditForm extends Component {
 		);
 	}
 }
+
+export class AddExperienceForm extends Component {
+	render() {
+		return (
+			<form className="add-form" onSubmit={this.props.onAddSubmit}>
+				<input type="text" name="placeName" placeholder="Add company" />
+				<input type="text" name="subTitle" placeholder="Add job title" />
+				<input type="text" name="timePeriod" placeholder="Month YYYY - Month YYYY" />
+				<input type="text" name="location" placeholder="City, ST" />
+				<input
+					type="text"
+					name="item-1"
+					placeholder="Add description such as core responsibilities"
+				/>
+				<input type="text" name="item-2" placeholder="Core Responsibility #2" />
+				<input type="text" name="item-3" placeholder="Core Responsibility #3" />
+				<button type="submit">Confirm</button>
+			</form>
+		);
+	}
+}

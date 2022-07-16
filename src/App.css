@@ -141,3 +141,27 @@ h3 {
 .personals-btn {
 	display: none;
 }
+
+.exp-edit-btn {
+	display: none;
+}
+
+.exp-content {
+	position: relative;
+}
+
+.exp-content:hover .exp-edit-btn {
+	position: absolute;
+	display: block;
+	z-index: 1;
+	left: 95%;
+	bottom: 0;
+}
+
+.exp-add-btn {
+	display: none;
+}
+
+section:hover .exp-add-btn {
+	display: block;
+}

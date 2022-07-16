@@ -30,7 +30,7 @@ const APPLICANT = {
 					city: 'Denver',
 					state: 'CO'
 				},
-				items: ['Manage facilities', 'Park cars']
+				items: ['Manage facilities', 'Park cars', '']
 			},
 			{
 				placeName: 'Amazon',
@@ -49,7 +49,7 @@ const APPLICANT = {
 					city: 'New York City',
 					state: 'NY'
 				},
-				items: ['Created totally legit online bookstore out of my garage', 'Make money']
+				items: ['Created totally legit online bookstore out of my garage', 'Make money', '']
 			}
 		],
 		education: [
